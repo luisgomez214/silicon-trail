@@ -73,4 +73,6 @@ python3 main.py
 ---
 
 ## Demo
-[Watch Video](https://github.com/luisgomez214/silicon-trail/blob/main/Screen%20Recording%202026-03-30%20at%2012.24.16%20AM.mov)
+[Watch Video]("Screen Recording 2026-03-30 at 12.24.16 AM.mov")
+[Watch Video](Screen Recording 2026-03-30 at 12.24.16 AM.mov)
+[Watch Video](https://github.com/luisgomez214/silicon-trail/blob/main/Screen%20Recording%202026-03-30%20at%2012.24.16%E2%80%AFAM.mov)
