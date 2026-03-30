@@ -70,5 +70,7 @@ cd silicon_trail
 ```
 python3 main.py
 ```
+---
 
-Screen Recording 2026-03-30 at 12.24.16 AM.mov
+## Demo
+open "Screen Recording 2026-03-30 at 12.24.16 AM.mov"
