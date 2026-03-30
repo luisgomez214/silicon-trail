@@ -15,48 +15,58 @@ class CriticalBug(Event):
     name = "Critical Bug"
 
     def can_trigger(self, state):
-        return state.bugs > 20
+        return state.bugs > 25 and random.random() < 0.2
 
     def execute(self, state):
-        state.bugs += 10
-        state.morale -= 5
+        state.bugs += 5
+        state.morale -= 3
         state.bugs = max(0, state.bugs)
         print("A critical bug appeared!")
 
 
-class Rain(Event):
-    name = "Rain"
+class WeatherEvent(Event):
+    name = "Weather"
 
     def can_trigger(self, state):
-        return state.weather == "rain"
+        return True
 
     def execute(self, state):
-        state.progress -= 3
-        state.progress = max(0, state.progress)
-        print("Rain slowed everything down.")
+        if state.weather == "sunny":
+            state.morale = min(100, state.morale + 3)
+            print("Beautiful day. Team morale is up.")
 
+        elif state.weather == "rain":
+            state.progress = max(0, state.progress - 2)
+            print("Rain slowed everything down.")
 
-class Cold(Event):
-    name = "Cold"
+        elif state.weather == "cold":
+            state.coffee = max(0, state.coffee - 2)
+            print("Cold weather — team is burning through coffee.")
 
-    def can_trigger(self, state):
-        return state.weather == "cold"
+        elif state.weather == "heat":
+            state.morale = max(0, state.morale - 3)
+            state.coffee = max(0, state.coffee - 1)
+            print("Brutal heat. Team is drained.")
 
-    def execute(self, state):
-        state.coffee -= 2
-        print("Cold weather increases coffee consumption.")
+        elif state.weather == "cloudy":
+            pass  
 
+        elif state.weather == "storm":
+            state.bugs += 3
+            state.morale = max(0, state.morale - 5)
+            print("Thunderstorm hits. Servers are down, bugs everywhere.")
+
+        elif state.weather == "fog":
+            state.progress = max(0, state.progress - 1)
+            print("Foggy day. Everything moves slower.")
 
 EVENTS = [
     CriticalBug(),
-    Rain(),
-    Cold(),
+    WeatherEvent(),
 ]
 
 
 def run_events(state):
-    possible_events = [e for e in EVENTS if e.can_trigger(state)]
-
-    if possible_events:
-        event = random.choice(possible_events)
-        event.execute(state)
+    for event in EVENTS:
+        if event.can_trigger(state):
+            event.execute(state)
